@@ -1,0 +1,112 @@
+Name- Sneha Jayvant Kumbhar
+PRN-22610006
+
+Title-Find 5 no summary of dataset
+
+Theory-
+A box plot gives a five-number summary of a set of data which is-
+Minimum (Lower Extreme)
+●	The smallest data value that is not considered an outlier.
+
+●	Shown at the end of the left whisker.
+First Quartile (Q1 / 25th percentile)
+●	The value below which 25% of the data fall.
+
+●	Represented by the left edge of the box.
+Median (Q2 / 50th percentile)
+●	The middle value of the dataset.
+
+●	Shown as a line inside the box.
+Third Quartile (Q3 / 75th percentile)
+●	The value below which 75% of the data fall.
+
+●	Represented by the right edge of the box.
+Maximum (Upper Extreme)
+●	The largest data value that is not considered an outlier.
+
+●	Shown at the end of the right whisker.
+
+
+Interquartile Range (IQR)
+●	Distance between Q1 and Q3.
+
+●	Represents the spread of the middle 50% of data.
+
+●	Width of the box = Q3 – Q1.
+Whiskers
+●	Lines extending from Q1 to the minimum within bounds and from Q3 to the maximum within bounds.
+
+●	They show the range of data excluding outliers.
+Outliers
+●	Data points lying outside the whiskers:
+
+○	Lower Outlier: < Q1 – 1.5 × IQR
+
+○	Upper Outlier: > Q3 + 1.5 × IQR
+
+●	Plotted as individual points (dots or stars).
+Steps to Summarize a Data Set with a Five-Number Summary
+Step 1: Order the values from least to greatest.
+Step 2: Determine the minimum and maximum of the data set by identifying the lowest and highest values.
+Step 3: Find the median of the data set. Separate the lower half from the upper half.
+Step 4: Find the first and third quartiles by finding the median of the lower half and upper half of the data.
+Step 5: Summarize the data set by stating the minimum, first quartile, median, third quartile, and maximum .
+ 
+Python Implementation:
+import csv
+def median(v):
+   v = sorted(v)
+   n = len(v)
+   if n % 2 == 0:
+       return (v[n//2 - 1] + v[n//2]) / 2.0
+   else:
+       return v[n//2]
+
+def five_number_summary_with_outliers(data):
+   data = sorted(data)
+   Q2 = median(data)
+   n = len(data)
+   if n % 2 == 0:
+       lower_half = data[:n//2]
+       upper_half = data[n//2:]
+   else:
+       lower_half = data[:n//2]
+       upper_half = data[n//2+1:]
+
+   Q1 = median(lower_half)
+   Q3 = median(upper_half)
+   IQR = Q3 - Q1
+   lower_bound = Q1 - 1.5 * IQR
+   upper_bound = Q3 + 1.5 * IQR
+   lower_whisker = min([x for x in data if x >= lower_bound], default=data[0])
+   upper_whisker = max([x for x in data if x <= upper_bound], default=data[-1])
+   return {
+       "Q1": Q1,
+       "Median (Q2)": Q2,
+       "Q3": Q3,
+       "IQR": IQR,
+       "Lower Whisker": lower_whisker,
+       "Upper Whisker": upper_whisker
+   }
+
+ball_pens = []
+gel_pens = []
+with open("student_pens.csv", "r") as file:
+   reader = csv.DictReader(file)
+   for row in reader:
+       ball_pens.append(int(row["BallPen"]))
+       gel_pens.append(int(row["GelPen"]))
+
+print("BallPen Summary:")
+for k, v in five_number_summary_with_outliers(ball_pens).items():
+   print(f"{k}: {v}")
+
+print("\nGelPen Summary:")
+for k, v in five_number_summary_with_outliers(gel_pens).items():
+   print(f"{k}: {v}")
+
+
+Output:
+ 
+Conclusion:
+In this experiment, I calculated the 5-number summary, interquartile range (IQR), whiskers, and outliers to analyze the distribution of a dataset. The results clearly showed how the minimum, quartiles, median, and maximum provide a compact summary of the data, while the IQR helps measure variability in the central portion. By identifying whiskers and detecting outliers, we understood how extreme values can be separated from the main data distribution. Overall, this method proves effective in data mining for summarizing datasets, detecting anomalies, and supporting further statistical analysis or visualization u

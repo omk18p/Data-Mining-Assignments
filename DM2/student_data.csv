@@ -1,0 +1,34 @@
+Semester,University,Department,Subject,Score
+2023-1,IIT Bombay,Computer Science,Data Structures,85
+2023-1,IIT Bombay,Computer Science,Algorithms,78
+2023-1,IIT Bombay,Computer Science,Database Systems,92
+2023-1,IIT Delhi,Mathematics,Calculus,88
+2023-1,IIT Delhi,Mathematics,Linear Algebra,91
+2023-1,IIT Madras,Physics,Mechanics,76
+2023-1,IIT Madras,Physics,Electromagnetism,83
+2023-2,IIT Bombay,Computer Science,Data Structures,87
+2023-2,IIT Bombay,Computer Science,Algorithms,82
+2023-2,IIT Bombay,Computer Science,Database Systems,89
+2023-2,IIT Delhi,Mathematics,Calculus,85
+2023-2,IIT Delhi,Mathematics,Linear Algebra,94
+2023-2,IIT Madras,Physics,Mechanics,79
+2023-2,IIT Madras,Physics,Electromagnetism,86
+2024-1,IIT Bombay,Computer Science,Data Structures,90
+2024-1,IIT Bombay,Computer Science,Algorithms,85
+2024-1,IIT Bombay,Computer Science,Database Systems,93
+2024-1,IIT Delhi,Mathematics,Calculus,87
+2024-1,IIT Delhi,Mathematics,Linear Algebra,96
+2024-1,IIT Madras,Physics,Mechanics,81
+2024-1,IIT Madras,Physics,Electromagnetism,88
+2023-1,BITS Pilani,Computer Science,Machine Learning,89
+2023-1,BITS Pilani,Computer Science,Computer Networks,84
+2023-1,NIT Trichy,Electronics,Digital Electronics,91
+2023-1,NIT Trichy,Electronics,Microprocessors,86
+2023-2,BITS Pilani,Computer Science,Machine Learning,92
+2023-2,BITS Pilani,Computer Science,Computer Networks,88
+2023-2,NIT Trichy,Electronics,Digital Electronics,94
+2023-2,NIT Trichy,Electronics,Microprocessors,89
+2024-1,BITS Pilani,Computer Science,Machine Learning,95
+2024-1,BITS Pilani,Computer Science,Computer Networks,91
+2024-1,NIT Trichy,Electronics,Digital Electronics,96
+2024-1,NIT Trichy,Electronics,Microprocessors,93

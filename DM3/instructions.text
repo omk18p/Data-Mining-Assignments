@@ -1,0 +1,141 @@
+
+Title- Find t and d weight of data
+
+Theory-
+1. T-weight (Transactional Weight)
+Definition:
+ T-weight measures the relative importance of an item within a specific class. It shows how much a particular item contributes to representing that class when compared to all other items in the same class.
+Formula:
+T-weight(i, C) = (Frequency of item i in class C) / (Total frequency of all items in class C)
+Explanation:
+●	Numerator: Number of times item i appears in class C.
+
+●	Denominator: Sum of frequencies of all items in class C.
+
+●	Range: 0 to 1 (or 0% to 100%).
+
+●	Interpretation:
+
+○	High T-weight: Item is highly representative of the class.
+
+○	Low T-weight: Item is less common within the class.
+
+Purpose:
+●	Determines the representativeness of an item within its own class.
+
+●	Helps in identifying the most characteristic features of a class.
+
+2. D-weight (Discrimination Weight)
+Definition:
+ D-weight measures how strongly an item is associated with one class compared to all other classes. It tells us how uniquely an item belongs to a specific class.
+Formula:
+D-weight(i, C) = (Frequency of item i in class C) / (Total frequency of item i across all classes)
+Explanation:
+●	Numerator: Number of times item i appears in class C.
+
+●	Denominator: Number of times item i appears in the entire dataset (across all classes).
+
+●	Range: 0 to 1 (or 0% to 100%).
+
+●	Interpretation:
+
+○	High D-weight: Item appears mostly in this class (unique indicator).
+
+○	Low D-weight: Item is spread across multiple classes (not unique).
+Purpose:
+●	Measures the uniqueness of an item for a specific class.
+
+●	Helps in identifying discriminating features that separate one class from another.
+
+3. Relationship Between T-weight and D-weight
+●	T-weight focuses on representation within a class.
+
+●	D-weight focuses on uniqueness across classes.
+
+●	High T-weight + High D-weight: Item is both representative and unique, making it an excellent class identifier.
+
+4. Usage in Data Mining
+●	Classification: Selecting features that represent a class and distinguish it from others.
+
+●	Pattern Discovery: Finding items that are both common and unique to certain classes.
+
+●	Association Rule Mining: Strengthening rules by choosing items with high representativeness and uniqueness.
+
+
+Python Implementation:
+import csv
+
+class Student:
+   def __init__(self, name, ball_pen, gel_pen):
+       self.name = name
+       self.ball_pen = float(ball_pen)
+       self.gel_pen = float(gel_pen)
+
+students = []
+with open("students_pens.csv", "r") as file:
+   reader = csv.reader(file)
+   next(reader)
+   for row in reader:
+       name, b, g = row
+       students.append(Student(name, b, g))
+
+total_ball = sum(s.ball_pen for s in students)
+total_gel = sum(s.gel_pen for s in students)
+total_all = sum(s.ball_pen + s.gel_pen for s in students)
+
+with open("output.csv", "w", newline="") as outfile:
+   writer = csv.writer(outfile)
+   writer.writerow([
+       "Student", "BallPen", "T-Weight(Ball)", "D-Weight(Ball)",
+       "GelPen", "T-Weight(Gel)", "D-Weight(Gel)",
+       "Both", "T-Weight(Both)", "D-Weight(Both)"
+   ])
+
+   for s in students:
+       total_student = s.ball_pen + s.gel_pen
+
+       t_weight_ball = (s.ball_pen / total_ball) * 100 if total_ball else 0
+       d_weight_ball = (s.ball_pen / total_student) * 100 if total_student else 0
+
+       t_weight_gel = (s.gel_pen / total_gel) * 100 if total_gel else 0
+       d_weight_gel = (s.gel_pen / total_student) * 100 if total_student else 0
+
+       both_count = total_student
+       t_weight_both = (both_count / total_all) * 100 if total_all else 0
+       d_weight_both = 100.0
+
+       writer.writerow([
+           s.name, s.ball_pen, round(t_weight_ball, 2), round(d_weight_ball, 2),
+           s.gel_pen, round(t_weight_gel, 2), round(d_weight_gel, 2),
+           both_count, round(t_weight_both, 2), round(d_weight_both, 2)
+       ])
+
+
+   writer.writerow([
+       "Total", total_ball, 100.0, 100.0,
+       total_gel, 100.0, 100.0,
+       total_all, 100.0, 100.0
+   ])
+
+print("Output saved to output.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+Output:
+ 
+Conclusion:
+In this experiment, I calculated the Transactional Weight (T-weight) and Discrimination Weight (D-weight) for given data to understand the representativeness and uniqueness of attribute values in different classes. T-weight helped identify how strongly an item represents a specific class, while D-weight highlighted the distinctiveness of that item compared to other classes. By analyzing both measures together, I can effectively select features that are both common within a class and unique across classes, which is valuable for classification, pattern discovery, and association rule mining in data mining applications.
+
+
+
+
+
